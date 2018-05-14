@@ -2,6 +2,7 @@ package in.paperwrk.safetycollabproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
@@ -32,6 +33,7 @@ import in.paperwrk.safetycollabproject.accounts.SigninActivity;
 
 public class HomeActivity extends AppCompatActivity implements AccelerometerListener {
 
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -39,6 +41,7 @@ public class HomeActivity extends AppCompatActivity implements AccelerometerList
             AccelerometerManager.startListening(this);
         }
     }
+
 
     @Override
     public void onAccelerationChanged(float x, float y, float z) {
@@ -93,7 +96,9 @@ public class HomeActivity extends AppCompatActivity implements AccelerometerList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        Intent intent = new Intent(this, MyService.class);
+        //Start Service
+        startService(intent);
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference();
         mFirebaseAuth = FirebaseAuth.getInstance();
